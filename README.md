@@ -41,7 +41,7 @@ Health Assessment: Provides warnings based on specified paramaters.
 | Condition                      | Drive Type | Threshold | Severity |
 |--------------------------------|------------|-----------|----------|
 | ZFS Read/Write/Checksum Errors | Any        | >0        | Critical |
-| Days Since Last Test           | Any        | >60       | Caution  |
+| Days Since Last Test (On Supported drive)           | Any        | >60       | Caution  |
 
 
 ## Requirements
