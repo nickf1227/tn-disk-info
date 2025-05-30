@@ -12,19 +12,37 @@ Health Assessment: Provides warnings based on specified paramaters.
 
 ## Alerting Parameters
 
-| Condition                          | Drive Type | Threshold     | Severity      |
-|------------------------------------|------------|---------------|---------------|
-| Offline Uncorrectable              | SATA       | >0            | Critical      |
-| Media Errors                       | NVMe       | >0            | Critical      |
-| Uncorrected Read/Write/Verify      | SAS        | >0            | Critical      |
-| ZFS Read/Write/Checksum Errors     | Any        | >0            | Critical      |
-| Corrected Errors                   | SAS        | >1,000,000    | Critical      |
-| Corrected Errors                   | SAS        | >100,000      | Performance   |
-| Raw Read Error Rate                | SATA       | >0            | Caution       |
-| Seek Error Rate                    | SATA       | >0            | Caution       |
-| Error Log Entries                  | NVMe       | >0            | Caution       |
-| Grown Defects                      | SAS        | >0            | Caution       |
-| Days Since Last Test               | Any        | >60           | Caution       |
+### SAS
+
+| Condition                          | Drive Type | Threshold     | Severity    |
+|------------------------------------|------------|---------------|-------------|
+| Uncorrected Read/Write/Verify      | SAS        | >0            | Critical    |
+| Corrected Errors                   | SAS        | >1,000,000    | Critical    |
+| Corrected Errors                   | SAS        | >100,000      | Performance |
+| Grown Defects                      | SAS        | >0            | Caution     |
+
+### SATA
+
+| Condition              | Drive Type | Threshold | Severity |
+|------------------------|------------|-----------|----------|
+| Offline Uncorrectable  | SATA       | >0        | Critical |
+| Raw Read Error Rate    | SATA       | >0        | Caution  |
+| Seek Error Rate        | SATA       | >0        | Caution  |
+
+### NVMe
+
+| Condition       | Drive Type | Threshold | Severity |
+|-----------------|------------|-----------|----------|
+| Media Errors    | NVMe       | >0        | Critical |
+| Error Log Entries | NVMe     | >0        | Caution  |
+
+### Any
+
+| Condition                      | Drive Type | Threshold | Severity |
+|--------------------------------|------------|-----------|----------|
+| ZFS Read/Write/Checksum Errors | Any        | >0        | Critical |
+| Days Since Last Test           | Any        | >60       | Caution  |
+
 
 ## Requirements
 TrueNAS SCALE/CE
