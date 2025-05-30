@@ -258,7 +258,7 @@ Export Results to JSON
   ############################################################
 ```
 
-Example Output SATA
+## Example Output SATA
 
 ```
 root@truenas[/home/truenas_admin]# python3 diskmapper.py
@@ -361,8 +361,7 @@ root@truenas[/home/truenas_admin]# python3 diskmapper.py
     ............................................................
   ############################################################
 ```
-
-Example Output NVME
+##Example Output NVME
 
 ```
 root@prod:~# python3 diskmaps.py
