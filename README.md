@@ -48,7 +48,7 @@ Health Assessment: Provides warnings based on specified paramaters.
 
 ## Alerting Parameters...cont
 
-## If there are fields that are missing or thresholds that should be modified, PRs and dicussion are welcome. 
+### If there are fields that are missing or thresholds that should be modified, PRs and dicussion are welcome. 
 
 ### A Bit more on Corrected Errors:
 #### These thresholds are somewhat arbitrary. My polstulation is based on these assumptions.
