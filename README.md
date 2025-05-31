@@ -22,6 +22,7 @@ Health Assessment: Provides warnings based on specified paramaters.
 | Corrected Errors                   | SAS        | >10,000       | Caution     |
 | Grown Defects                      | SAS        | >0            | Caution     |
 
+
 ### SATA
 
 | Condition              | Drive Type | Threshold | Severity |
@@ -44,6 +45,19 @@ Health Assessment: Provides warnings based on specified paramaters.
 | ZFS Read/Write/Checksum Errors | Any        | >0        | Critical |
 | Days Since Last Test (On Supported drive)           | Any        | >60       | Caution  |
 
+
+## Alerting Parameters...cont
+
+# A Bit more on Corrected Errors:
+These thresholds are somewhat arbitrary. My polstulation is based on these assumptions.
+
+*** When the drive has to correct errors, it may take extra time to read or write the data. This can lead to increased latency and reduced throughput. In a ZFS vdev (which is typically a group of drives working together), a single slow drive can slow down the entire vdev because ZFS waits for all drives to complete the operation. ***
+
+However this Dell document, Last Modified: 01 May 2025 contraindicates that assumption.
+
+*** The SMART specification allows vendors to provide these counters, such as the ones shown in the above example, for informational purposes. The counters are not necessarily a count of soft or hard faults within the ECC logic. This allows each drive vendor flexibility as to what is displayed in the available SMART fields. For some vendors, no error data is in the ECC read or verify categories. In the example above, the vendor has chosen to use the counters for monitoring the ECC functionality. The values which are presented do not represent an error-rate. Similarly, a higher rate of events on some disks in comparison to others does not indicate that a performance problem exists. ***
+
+# https://www.dell.com/support/kbdoc/en-us/000147878/excessive-smart-error-rates-logged-for-read-and-verify-ecc-errors-on-certain-enterprise-hard-drives
 
 ## Requirements
 TrueNAS SCALE/CE
