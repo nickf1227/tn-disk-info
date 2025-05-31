@@ -60,6 +60,10 @@ Basic Usage (Console Output)
 Export Results to JSON
 ```sudo python3 diskmapper.py --json /path/to/output.json```
 
+## Screenshot
+![image](https://github.com/user-attachments/assets/da1b0758-7a65-4a09-8355-ed3aa0abe3d3)
+
+
 ## Example Output (SAS)
 ```
 ================================== POOL: ice ===================================
@@ -261,7 +265,7 @@ Export Results to JSON
 ## Example Output SATA
 
 ```
-root@truenas[/home/truenas_admin]# python3 diskmapper.py
+root@truenas[/home/truenas_admin]# python3 diskmap.py
 
 ================================= POOL: vault ==================================
 
@@ -279,7 +283,7 @@ root@truenas[/home/truenas_admin]# python3 diskmapper.py
     SMART DATA FOR /dev/sda:
     ├─ Drive Type: SATA
     ├─ Health Status: PASSED
-    ├─ Power On Hours: 0
+    ├─ Power On Hours: 32886
     ├─ SMART Attributes:
     │  ├─ Raw Read Error Rate: 0
     │  ├─ Seek Error Rate: 0
@@ -288,7 +292,17 @@ root@truenas[/home/truenas_admin]# python3 diskmapper.py
     └─ Last Test: Short
        ├─ Status: offline       Completed
        ├─ Lifetime Hours: 30950
-       └─ Time Since: -30950 hours ago
+       └─ Time Since: 80 days ago
+
+
+    ------------------------------------------------------------
+    CAUTION: MONITOR THIS DRIVE CLOSELY
+he disk shows some errors but doesn't appear to be failing yet:
+      • Last SMART test was 80 days ago - recommend running a new test
+    Recommendations:
+      • Monitor SMART attributes regularly
+      • Run a new SMART short test
+    ------------------------------------------------------------
     ............................................................
     Pool Device: /dev/sdb1
     ├─ ZFS GUID: 12912970852056213168
@@ -302,7 +316,7 @@ root@truenas[/home/truenas_admin]# python3 diskmapper.py
     SMART DATA FOR /dev/sdb:
     ├─ Drive Type: SATA
     ├─ Health Status: PASSED
-    ├─ Power On Hours: 0
+    ├─ Power On Hours: 53487
     ├─ SMART Attributes:
     │  ├─ Raw Read Error Rate: 0
     │  ├─ Seek Error Rate: 0
@@ -311,7 +325,17 @@ root@truenas[/home/truenas_admin]# python3 diskmapper.py
     └─ Last Test: Short
        ├─ Status: offline       Completed
        ├─ Lifetime Hours: 51883
-       └─ Time Since: -51883 hours ago
+       └─ Time Since: 66 days ago
+
+
+    ------------------------------------------------------------
+    CAUTION: MONITOR THIS DRIVE CLOSELY
+he disk shows some errors but doesn't appear to be failing yet:
+      • Last SMART test was 66 days ago - recommend running a new test
+    Recommendations:
+      • Monitor SMART attributes regularly
+      • Run a new SMART short test
+    ------------------------------------------------------------
     ............................................................
     Pool Device: /dev/sdc1
     ├─ ZFS GUID: 6061726270598089927
@@ -325,7 +349,7 @@ root@truenas[/home/truenas_admin]# python3 diskmapper.py
     SMART DATA FOR /dev/sdc:
     ├─ Drive Type: SATA
     ├─ Health Status: PASSED
-    ├─ Power On Hours: 0
+    ├─ Power On Hours: 53312
     ├─ SMART Attributes:
     │  ├─ Raw Read Error Rate: 0
     │  ├─ Seek Error Rate: 0
@@ -334,7 +358,17 @@ root@truenas[/home/truenas_admin]# python3 diskmapper.py
     └─ Last Test: Short
        ├─ Status: offline       Completed
        ├─ Lifetime Hours: 51708
-       └─ Time Since: -51708 hours ago
+       └─ Time Since: 66 days ago
+
+
+    ------------------------------------------------------------
+    CAUTION: MONITOR THIS DRIVE CLOSELY
+he disk shows some errors but doesn't appear to be failing yet:
+      • Last SMART test was 66 days ago - recommend running a new test
+    Recommendations:
+      • Monitor SMART attributes regularly
+      • Run a new SMART short test
+    ------------------------------------------------------------
     ............................................................
     Pool Device: /dev/sdd1
     ├─ ZFS GUID: 9113497765191841136
@@ -348,7 +382,7 @@ root@truenas[/home/truenas_admin]# python3 diskmapper.py
     SMART DATA FOR /dev/sdd:
     ├─ Drive Type: SATA
     ├─ Health Status: PASSED
-    ├─ Power On Hours: 0
+    ├─ Power On Hours: 50971
     ├─ SMART Attributes:
     │  ├─ Raw Read Error Rate: 0
     │  ├─ Seek Error Rate: 0
@@ -357,7 +391,17 @@ root@truenas[/home/truenas_admin]# python3 diskmapper.py
     └─ Last Test: Short
        ├─ Status: offline       Completed
        ├─ Lifetime Hours: 46577
-       └─ Time Since: -46577 hours ago
+       └─ Time Since: 183 days ago
+
+
+    ------------------------------------------------------------
+    CAUTION: MONITOR THIS DRIVE CLOSELY
+he disk shows some errors but doesn't appear to be failing yet:
+      • Last SMART test was 183 days ago - recommend running a new test
+    Recommendations:
+      • Monitor SMART attributes regularly
+      • Run a new SMART short test
+    ------------------------------------------------------------
     ............................................................
   ############################################################
 ```
