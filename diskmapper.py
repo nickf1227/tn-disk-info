@@ -108,7 +108,7 @@ def parse_smart_data(smart_output):
         
         # Parse corrected errors
         read_corrected = re.search(r"read:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)", smart_output)
-        write_corrected = re.search(r"write:\s+(\极d+)\s+(\d+)\s+(\d+)\s+(\d+)", smart_output)
+        write_corrected = re.search(r"write:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)", smart_output)
         verify_corrected = re.search(r"verify:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)", smart_output)
         
         results['read_corrected'] = int(read_corrected.group(4)) if read_corrected else 0
