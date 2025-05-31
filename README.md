@@ -19,6 +19,7 @@ Health Assessment: Provides warnings based on specified paramaters.
 | Uncorrected Read/Write/Verify      | SAS        | >0            | Critical    |
 | Corrected Errors                   | SAS        | >1,000,000    | Critical    |
 | Corrected Errors                   | SAS        | >100,000      | Performance |
+| Corrected Errors                   | SAS        | >10,000       | Caution     |
 | Grown Defects                      | SAS        | >0            | Caution     |
 
 ### SATA
