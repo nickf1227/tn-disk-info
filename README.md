@@ -53,7 +53,7 @@ Health Assessment: Provides warnings based on specified paramaters.
 ### A Bit more on Corrected Errors:
 #### These thresholds are somewhat arbitrary. My polstulation is based on these assumptions.
 
-*When the drive has to correct errors, it may take extra time to read or write the data. This can lead to increased latency and reduced throughput. In a ZFS vdev (which is typically a group of drives working together), a single slow drive can slow down the entire vdev because ZFS waits for all drives to complete the operation.*
+*When the drive has to correct errors, it may take extra time to read or write the data. This can lead to increased latency and reduced throughput. In a ZFS vdev (which is typically a group of drives working together), a single slow drive can slow down the entire vdev because ZFS waits for all drives to complete the operation. This may be especially painful or obvious during a scrub.*
 
 #### However this Dell document, Last Modified: 01 May 2025 contraindicates that assumption, so I will welcome any feedback. I have seen evidence, real and anecdotal, that support both of these positions. 
 
