@@ -48,7 +48,7 @@ Health Assessment: Provides warnings based on specified paramaters.
 
 ## Alerting Parameters...cont
 
-# A Bit more on Corrected Errors:
+### A Bit more on Corrected Errors:
 These thresholds are somewhat arbitrary. My polstulation is based on these assumptions.
 
 *** When the drive has to correct errors, it may take extra time to read or write the data. This can lead to increased latency and reduced throughput. In a ZFS vdev (which is typically a group of drives working together), a single slow drive can slow down the entire vdev because ZFS waits for all drives to complete the operation. ***
