@@ -57,7 +57,7 @@ However this Dell document, Last Modified: 01 May 2025 contraindicates that assu
 
 *** The SMART specification allows vendors to provide these counters, such as the ones shown in the above example, for informational purposes. The counters are not necessarily a count of soft or hard faults within the ECC logic. This allows each drive vendor flexibility as to what is displayed in the available SMART fields. For some vendors, no error data is in the ECC read or verify categories. In the example above, the vendor has chosen to use the counters for monitoring the ECC functionality. The values which are presented do not represent an error-rate. Similarly, a higher rate of events on some disks in comparison to others does not indicate that a performance problem exists. ***
 
-# https://www.dell.com/support/kbdoc/en-us/000147878/excessive-smart-error-rates-logged-for-read-and-verify-ecc-errors-on-certain-enterprise-hard-drives
+### https://www.dell.com/support/kbdoc/en-us/000147878/excessive-smart-error-rates-logged-for-read-and-verify-ecc-errors-on-certain-enterprise-hard-drives
 
 ## Requirements
 TrueNAS SCALE/CE
