@@ -53,7 +53,7 @@ Health Assessment: Provides warnings based on specified paramaters.
 
 ***When the drive has to correct errors, it may take extra time to read or write the data. This can lead to increased latency and reduced throughput. In a ZFS vdev (which is typically a group of drives working together), a single slow drive can slow down the entire vdev because ZFS waits for all drives to complete the operation.***
 
-#### However this Dell document, Last Modified: 01 May 2025 contraindicates that assumption.
+#### However this Dell document, Last Modified: 01 May 2025 contraindicates that assumption, so I will welcome any feedback. I have seen evidence, real and anecdotal, that support both of these positions. 
 
 ***The SMART specification allows vendors to provide these counters, such as the ones shown in the above example, for informational purposes. The counters are not necessarily a count of soft or hard faults within the ECC logic. This allows each drive vendor flexibility as to what is displayed in the available SMART fields. For some vendors, no error data is in the ECC read or verify categories. In the example above, the vendor has chosen to use the counters for monitoring the ECC functionality. The values which are presented do not represent an error-rate. Similarly, a higher rate of events on some disks in comparison to others does not indicate that a performance problem exists.***
 
