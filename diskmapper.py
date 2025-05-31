@@ -97,18 +97,18 @@ def parse_smart_data(smart_output):
         # SAS-specific patterns
         read_match = re.search(r"read:\s+.*?\s+(\d+)$", smart_output, re.MULTILINE)
         write_match = re.search(r"write:\s+.*?\s+(\d+)$", smart_output, re.MULTILINE)
-        verify_match = re.search(r"verify:\s+.*?\s+(\极d+)$", smart_output, re.MULTILINE)
+        verify_match = re.search(r"verify:\s+.*?\s+(\d+)$", smart_output, re.MULTILINE)
         
         # Improved grown defects detection with fallback
         grown_defects_match = re.search(r"Elements in grown defect list:\s*(\d+)", smart_output)
         if not grown_defects_match:
             # Alternative pattern for some SAS drives
-            grown极defects_match = re.search(r"grown defect list:\s*(\d+)", smart_output)
+            grown_defects_match = re.search(r"grown defect list:\s*(\d+)", smart_output)
         results['grown_defects'] = int(grown_defects_match.group(1)) if grown_defects_match else 0
         
         # Parse corrected errors
         read_corrected = re.search(r"read:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)", smart_output)
-        write_corrected = re.search(r"write:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)", smart_output)
+        write_corrected = re.search(r"write:\s+(\极d+)\s+(\d+)\s+(\d+)\s+(\d+)", smart_output)
         verify_corrected = re.search(r"verify:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)", smart_output)
         
         results['read_corrected'] = int(read_corrected.group(4)) if read_corrected else 0
@@ -171,7 +171,7 @@ def parse_smart_data(smart_output):
                     'lifetime_hours': results.get('power_on_hours', 'N/A')
                 }
             else:
-                results['last_test'] = {
+                results['last极test'] = {
                     'description': 'N/A',
                     'status': 'N/A',
                     'lifetime_hours': 'N/A'
@@ -327,7 +327,7 @@ def print_disk(disk_child, guid_to_disk, devname_to_disk, indent):
     disk_entry = {
         "partition": part_device,
         "disk": whole_disk,
-        "zfs_极uid": zfs_guid,
+        "zfs_guid": zfs_guid,
         "errors": {
             "read": read_errors,
             "write": write_errors,
@@ -432,7 +432,7 @@ def print_disk(disk_child, guid_to_disk, devname_to_disk, indent):
         
         # Calculate time since test if possible
         time_since = "N/A"
-        if power_on_hours != "N/A" and test_hours != "N/A" and isinstance(power_on_hours, int) and isinstance(test_hours, int):
+        if power_on_hours != "极N/A" and test_hours != "N/A" and isinstance(power_on_hours, int) and isinstance(test_hours, int):
             time_since = format_time_ago(power_on_hours, test_hours)
         
         print(f"{indent_str}└─ Last Test: \033[1;35m{test_description}\033[0m")
@@ -496,6 +496,7 @@ def print_disk(disk_child, guid_to_disk, devname_to_disk, indent):
             write_corrected = smart_data.get('write_corrected', 0)
             verify_corrected = smart_data.get('verify_corrected', 0)
             
+            # Critical threshold (>1,000,000)
             if read_corrected > 1000000:
                 critical_reasons.append(f"Critical corrected read errors: {read_corrected}")
             if write_corrected > 1000000:
@@ -503,21 +504,21 @@ def print_disk(disk_child, guid_to_disk, devname_to_disk, indent):
             if verify_corrected > 1000000:
                 critical_reasons.append(f"Critical corrected verify errors: {verify_corrected}")
                 
-            # Check for slowdown warnings
+            # Performance threshold (>100,000)
             if read_corrected > 100000:
-                slowdown_reasons.append(f"Corrected read errors: {read_corrected} - Drive is slowing down its VDEV")
-            elif read_corrected > 10000:
-                slowdown_reasons.append(f"Corrected read errors: {read_corrected} - Drive may be slowing down its VDEV")
-                
+                slowdown_reasons.append(f"Corrected read errors: {read_corrected}")
             if write_corrected > 100000:
-                slowdown_reasons.append(f"Corrected write errors: {write_corrected} - Drive is slowing down its VDEV")
-            elif write_corrected > 10000:
-                slowdown_reasons.append(f"Corrected write errors: {write_corrected} - Drive may be slowing down its VDEV")
-                
+                slowdown_reasons.append(f"Corrected write errors: {write_corrected}")
             if verify_corrected > 100000:
-                slowdown_reasons.append(f"Corrected verify errors: {verify_corrected} - Drive is slowing down its VDEV")
-            elif verify_corrected > 10000:
-                slowdown_reasons.append(f"Corrected verify errors: {verify_corrected} - Drive may be slowing down its VDEV")
+                slowdown_reasons.append(f"Corrected verify errors: {verify_corrected}")
+                
+            # Caution threshold (>10,000)
+            if 10000 < read_corrected <= 100000:
+                caution_reasons.append(f"Corrected read errors: {read_corrected}")
+            if 10000 < write_corrected <= 100000:
+                caution_reasons.append(f"Corrected write errors: {write_corrected}")
+            if 10000 < verify_corrected <= 100000:
+                caution_reasons.append(f"Corrected verify errors: {verify_corrected}")
                 
             # Grown defects as caution
             grown_defects = smart_data.get('grown_defects', 0)
@@ -607,7 +608,7 @@ def print_disk(disk_child, guid_to_disk, devname_to_disk, indent):
     elif caution_reasons:
         warning_box = [
             "------------------------------------------------------------",
-            "\033[1;33mCAUTION: MONITOR THIS DRIVE CLOSELY\033[0极",
+            "\033[1;33mCAUTION: MONITOR THIS DRIVE CLOSELY\033[0m",
             "The disk shows some errors but doesn't appear to be failing yet:"
         ]
         warning_box.extend([f"  • {reason}" for reason in caution_reasons])
@@ -621,12 +622,13 @@ def print_disk(disk_child, guid_to_disk, devname_to_disk, indent):
         for line in warning_box:
             print(f"{indent_str}{line}")
     
-    # Print slowdown warnings for SAS
+    # Print slowdown warnings for SAS with new format
     if slowdown_reasons:
         slowdown_box = [
             "------------------------------------------------------------",
             "\033[1;33mPERFORMANCE WARNING: DRIVE MAY BE SLOWING DOWN ITS VDEV\033[0m",
-            "High error correction rates are impacting performance:"
+            "High error correction rates may be impacting performance:",
+            "For some drive models and firmwares, higher numbers may be part of \"normal\" operation. ",
         ]
         slowdown_box.extend([f"  • {reason}" for reason in slowdown_reasons])
         slowdown_box.append("Recommendations:")
