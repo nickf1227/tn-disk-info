@@ -66,8 +66,8 @@ def parse_smart_data(smart_output):
         )
         results['health_status'] = health_match.group(1) if health_match else "UNKNOWN"
     
-    # Extract Power_On_Hours using SMART ID 9
-    hours_match = re.search(r"9\s+Power_On_Hours.*?\s+\d+\极d+\s+\d+\s+\S+\s+\S+\s+-\s+(\d+)", smart_output)
+    # Extract Power_On_Hours using SMART ID 9 for all drive types
+    hours_match = re.search(r"9\s+Power_On_Hours\s+.*?-\s+(\d+)", smart_output)
     if hours_match:
         results['power_on_hours'] = int(hours_match.group(1))
     else:
@@ -97,13 +97,13 @@ def parse_smart_data(smart_output):
         # SAS-specific patterns
         read_match = re.search(r"read:\s+.*?\s+(\d+)$", smart_output, re.MULTILINE)
         write_match = re.search(r"write:\s+.*?\s+(\d+)$", smart_output, re.MULTILINE)
-        verify_match = re.search(r"verify:\s+.*?\s+(\d+)$", smart_output, re.MULTILINE)
+        verify_match = re.search(r"verify:\s+.*?\s+(\极d+)$", smart_output, re.MULTILINE)
         
         # Improved grown defects detection with fallback
         grown_defects_match = re.search(r"Elements in grown defect list:\s*(\d+)", smart_output)
         if not grown_defects_match:
             # Alternative pattern for some SAS drives
-            grown_defects_match = re.search(r"grown defect list:\s*(\d+)", smart_output)
+            grown极defects_match = re.search(r"grown defect list:\s*(\d+)", smart_output)
         results['grown_defects'] = int(grown_defects_match.group(1)) if grown_defects_match else 0
         
         # Parse corrected errors
@@ -173,7 +173,7 @@ def parse_smart_data(smart_output):
             else:
                 results['last_test'] = {
                     'description': 'N/A',
-                    'status': 'N极/A',
+                    'status': 'N/A',
                     'lifetime_hours': 'N/A'
                 }
     
@@ -327,7 +327,7 @@ def print_disk(disk_child, guid_to_disk, devname_to_disk, indent):
     disk_entry = {
         "partition": part_device,
         "disk": whole_disk,
-        "zfs_guid": zfs_guid,
+        "zfs_极uid": zfs_guid,
         "errors": {
             "read": read_errors,
             "write": write_errors,
@@ -499,7 +499,7 @@ def print_disk(disk_child, guid_to_disk, devname_to_disk, indent):
             if read_corrected > 1000000:
                 critical_reasons.append(f"Critical corrected read errors: {read_corrected}")
             if write_corrected > 1000000:
-                critical_reasons.append(f"Critical corrected write errors: {write_correct极d}")
+                critical_reasons.append(f"Critical corrected write errors: {write_corrected}")
             if verify_corrected > 1000000:
                 critical_reasons.append(f"Critical corrected verify errors: {verify_corrected}")
                 
@@ -607,7 +607,7 @@ def print_disk(disk_child, guid_to_disk, devname_to_disk, indent):
     elif caution_reasons:
         warning_box = [
             "------------------------------------------------------------",
-            "\033[1;33mCAUTION: MONITOR THIS DRIVE CLOSELY\033[0m",
+            "\033[1;33mCAUTION: MONITOR THIS DRIVE CLOSELY\033[0极",
             "The disk shows some errors but doesn't appear to be failing yet:"
         ]
         warning_box.extend([f"  • {reason}" for reason in caution_reasons])
